@@ -1,6 +1,6 @@
 .todo-item{
     padding:1rem;
-    display: felx;
+    display: flex;
     align-items: center;
     cursor:pointer;
     transition:all 0.15s;
