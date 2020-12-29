@@ -1,0 +1,42 @@
+.palette{
+    display: flex;
+    justify-content: center;
+}
+
+.palette > div{
+    width:2rem;
+    height: 2rem;
+    margin:0 0.5rem;
+}
+
+.black{
+    background: rgb(65, 65, 65);
+}
+
+.black:hover{
+    background: black;
+}
+
+.red{
+    background: #ff9c9c;
+}
+
+.red:hover{
+    background: #F26F6F;
+}
+
+.green{
+    background: #8ad3b8;
+}
+
+.green:hover{
+    background: #62c7a2;
+}
+
+.blue{
+    background: #86bbf0;
+}
+
+.blue:hover{
+    background: #5EA5EB;
+}

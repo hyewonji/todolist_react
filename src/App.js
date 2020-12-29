@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoListTemplate from './components/TodoListTemplate';
+import Palette from './components/Palette';
 import Form from './components/Form';
 import TodoItemList from './components/TodoItemList';
 
@@ -13,7 +14,8 @@ class App extends Component {
       { id: 0, text: ' 리액트 소개', checked: false },
       { id: 1, text: ' 리액트 소개', checked: true },
       { id: 2, text: ' 리액트 소개', checked: false }
-    ]
+    ],
+    color: 'black'
   }
 
   handleChange = (e) => {
@@ -83,7 +85,7 @@ class App extends Component {
           onChange={handleChange}
           onCreate={handleCreate}
         />
-      )}>
+      )} palette={<Palette />}>
         <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove} />
       </TodoListTemplate>
     );
