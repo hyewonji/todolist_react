@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import TodoItem from './TodoItem';
 
 class TodoItemList extends Component {
+    // shouldComponentUpdate : 컴포넌트의 리렌더링 여부를 정해줌(기본값 : true)
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.todos !== nextProps.todos;
+    }
+
     render() {
         const { todos, onToggle, onRemove } = this.props;
 
