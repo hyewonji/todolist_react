@@ -12,7 +12,7 @@ class App extends Component {
     todos: [
       { id: 0, text: ' 리액트 소개', checked: false },
       { id: 1, text: ' 리액트 소개', checked: true },
-      { id: 2, text: ' 리액트 소개', checked: false },
+      { id: 2, text: ' 리액트 소개', checked: false }
     ]
   }
 
@@ -32,7 +32,6 @@ class App extends Component {
         checked: false
       })
     });
-    console.log(todos);
   }
 
   handleKeyPress = (e) => {
@@ -47,6 +46,8 @@ class App extends Component {
     const selected = todos[index];
     const nextTodos = [...todos];
 
+    //배열을 업데이트 할 때는 배열의 값을 직접 수정하면 절대 안됨!
+    //복잡도는 O(n)정도로 오버헤드가 발생하지 않음
     nextTodos[index] = {
       ...selected,
       checked: !selected.checked
@@ -57,13 +58,21 @@ class App extends Component {
     });
   }
 
+  handleRemove = (id) => {
+    const { todos } = this.state;
+    this.setState({
+      todos: todos.filter(todo => todo.id !== id)
+    });
+  }
+
   render() {
     const { input, todos } = this.state;
     const {
       handleChange,
       handleCreate,
       handleKeyPress,
-      handleToggle
+      handleToggle,
+      handleRemove
     } = this; // this.handleChange, this.handleCreate, this.handleKeyPress 이런식의 작업을 생략할 수 있다.
 
     return (
@@ -75,7 +84,7 @@ class App extends Component {
           onCreate={handleCreate}
         />
       )}>
-        <TodoItemList todos={todos} onToggle={handleToggle} />
+        <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove} />
       </TodoListTemplate>
     );
   }
