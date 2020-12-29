@@ -15,7 +15,7 @@ class App extends Component {
       { id: 1, text: ' 리액트 소개', checked: true },
       { id: 2, text: ' 리액트 소개', checked: false }
     ],
-    color: 'black'
+    color: '#343a40'
   }
 
   handleChange = (e) => {
@@ -67,25 +67,35 @@ class App extends Component {
     });
   }
 
+  handleColors = (e) => {
+    const { color } = this.state;
+    const colors = ['#343a40', '#f03e3e', '#12b886', '#228ae6'];
+    this.setState({
+      color: colors[Number(e.target.className)]
+    })
+  }
+
   render() {
-    const { input, todos } = this.state;
+    const { input, todos, color } = this.state;
     const {
       handleChange,
       handleCreate,
       handleKeyPress,
       handleToggle,
-      handleRemove
+      handleRemove,
+      handleColors
     } = this; // this.handleChange, this.handleCreate, this.handleKeyPress 이런식의 작업을 생략할 수 있다.
 
     return (
       <TodoListTemplate form={(
         <Form
           value={input}
+          color={color}
           onKeyPress={handleKeyPress}
           onChange={handleChange}
           onCreate={handleCreate}
         />
-      )} palette={<Palette />}>
+      )} palette={<Palette color={color} onColorClick={handleColors} />}>
         <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove} />
       </TodoListTemplate>
     );

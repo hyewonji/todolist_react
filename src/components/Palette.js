@@ -3,12 +3,16 @@ import './Palette.css';
 
 class Palette extends Component {
     render() {
+        const { color, onColorClick } = this.props;
+        const style = {
+            background: color
+        }
         return (
             <div className="palette" >
-                <div className="black" onClick=""></div>
-                <div className="red"></div>
-                <div className="green"></div>
-                <div className="blue"></div>
+                <div className="0" onClick={onColorClick}></div>
+                <div className="1" onClick={onColorClick}></div>
+                <div className="2" onClick={onColorClick}></div>
+                <div className="3" onClick={onColorClick}></div>
             </div>
         )
     }
