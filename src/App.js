@@ -26,7 +26,7 @@ class App extends Component {
     const { input, todos } = this.state;
     this.setState({
       input: '',
-      todos: todos.concat({ // push 대신 concat을 사용하는 이유 : push랄 사용하면 추가된 배열과 이전의 배열을 비교할 수 없다. == 최적화 할 수 없다.
+      todos: todos.concat({ // push 대신 concat을 사용하는 이유 : push랄 사용하면 추가된 배열과 이전의 배열을 비교할 수 없다. 즉, 최적화 할 수 없다.
         id: this.id++,
         text: input,
         checked: false
@@ -41,12 +41,29 @@ class App extends Component {
     }
   }
 
+  handleToggle = (id) => {
+    const { todos } = this.state;
+    const index = todos.findIndex(todo => todo.id === id);
+    const selected = todos[index];
+    const nextTodos = [...todos];
+
+    nextTodos[index] = {
+      ...selected,
+      checked: !selected.checked
+    };
+
+    this.setState({
+      todos: nextTodos
+    });
+  }
+
   render() {
     const { input, todos } = this.state;
     const {
       handleChange,
       handleCreate,
-      handleKeyPress
+      handleKeyPress,
+      handleToggle
     } = this; // this.handleChange, this.handleCreate, this.handleKeyPress 이런식의 작업을 생략할 수 있다.
 
     return (
@@ -58,7 +75,7 @@ class App extends Component {
           onCreate={handleCreate}
         />
       )}>
-        <TodoItemList todos={todos} />
+        <TodoItemList todos={todos} onToggle={handleToggle} />
       </TodoListTemplate>
     );
   }
