@@ -8,7 +8,7 @@ class TodoItemList extends Component {
     }
 
     render() {
-        const { todos, onToggle, onRemove } = this.props;
+        const { todos, color, onToggle, onRemove } = this.props;
 
         const todoList = todos.map(
             ({ id, text, checked }) => (
@@ -17,6 +17,7 @@ class TodoItemList extends Component {
                         todos.map((todo)=>(<TodoItem {...todo}/>))를 이용하면 내부 값들이 모두 자동으로 props로 설정이 된다. */
                     id={id}
                     text={text}
+                    color={color}
                     checked={checked}
                     onToggle={onToggle}
                     onRemove={onRemove}

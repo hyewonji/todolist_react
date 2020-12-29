@@ -96,7 +96,7 @@ class App extends Component {
           onCreate={handleCreate}
         />
       )} palette={<Palette color={color} onColorClick={handleColors} />}>
-        <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove} />
+        <TodoItemList todos={todos} color={color} onToggle={handleToggle} onRemove={handleRemove} />
       </TodoListTemplate>
     );
   }

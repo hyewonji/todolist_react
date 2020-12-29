@@ -24,6 +24,7 @@
 .remove{
     margin-right: 1rem;
     color:#e64980;
+    font-size: 1.5rem;
     font-weight: 600;
     opacity: 0;
 }
@@ -38,7 +39,7 @@
     color:#adb5bd;
 }
 
-.checked-mark{
+.check-mark{
     font-size: 1.5rem;
     line-height: 1rem;
     margin-left: 1rem;

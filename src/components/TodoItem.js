@@ -8,7 +8,10 @@ class TodoItem extends Component {
     }
 
     render() {
-        const { text, checked, id, onToggle, onRemove } = this.props;
+        const { text, color, checked, id, onToggle, onRemove } = this.props;
+        const style = {
+            color: color
+        }
 
         return (
             <div className="todo-item" onClick={() => onToggle(id)}>
@@ -20,7 +23,7 @@ class TodoItem extends Component {
                 }>&times;</div>
                 <div className={`todo-text ${checked ? ' checked' : ''}`}>
                     {/*classnames('todo-text',{checked} 로도 작성 할 수 있다.*/}
-                    <div>{text}</div>
+                    <div style={style}>{text}</div>
                 </div>
                 {
                     checked && (<div className="check-mark">✓</div>)
