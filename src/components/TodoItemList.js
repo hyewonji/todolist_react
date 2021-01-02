@@ -23,8 +23,10 @@ class TodoItemList extends Component {
                     onRemove={onRemove}
                     key={id} //배열을 렌더링 할 때는, key값이 꼭 있어야 한다.
                 />
+
             )
         );
+
         return (
             <div>
                 {todoList}

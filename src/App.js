@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
+import { createGlobalStyle } from 'styled-components';
 import TodoListTemplate from './components/TodoListTemplate';
 import Palette from './components/Palette';
 import Form from './components/Form';
 import TodoItemList from './components/TodoItemList';
+
+const GlobalStyle = createGlobalStyle`
+body{
+  margin:0;
+  padding:0;
+  font-family: sans-serif;
+  background: #e9ecef;
+}
+`;
 
 class App extends Component {
 
@@ -10,11 +20,7 @@ class App extends Component {
 
   state = {
     input: '',
-    todos: [
-      { id: 0, text: ' 리액트 소개', checked: false },
-      { id: 1, text: ' 리액트 소개', checked: true },
-      { id: 2, text: ' 리액트 소개', checked: false }
-    ],
+    todos: [],
     color: '#343a40'
   }
 
@@ -34,6 +40,8 @@ class App extends Component {
         checked: false
       })
     });
+    localStorage.todo = JSON.stringify(todos)
+    console.log(todos)
   }
 
   handleKeyPress = (e) => {
@@ -75,6 +83,21 @@ class App extends Component {
     })
   }
 
+  /*
+  constructor(props) {
+    super(props);
+    let { todos, id } = this.state;
+    const todoData = JSON.parse(localStorage.todo);
+    this.State = {
+      input: '',
+      todos: todoData,
+      color: '#343a40'
+    }
+    console.log(this.state)
+    console.log(todoData, this.state.todos)
+  }
+  */
+
   render() {
     const { input, todos, color } = this.state;
     const {
@@ -87,17 +110,20 @@ class App extends Component {
     } = this; // this.handleChange, this.handleCreate, this.handleKeyPress 이런식의 작업을 생략할 수 있다.
 
     return (
-      <TodoListTemplate form={(
-        <Form
-          value={input}
-          color={color}
-          onKeyPress={handleKeyPress}
-          onChange={handleChange}
-          onCreate={handleCreate}
-        />
-      )} palette={<Palette color={color} onColorClick={handleColors} />}>
-        <TodoItemList todos={todos} color={color} onToggle={handleToggle} onRemove={handleRemove} />
-      </TodoListTemplate>
+      <>
+        <GlobalStyle />
+        <TodoListTemplate form={(
+          <Form
+            value={input}
+            color={color}
+            onKeyPress={handleKeyPress}
+            onChange={handleChange}
+            onCreate={handleCreate}
+          />
+        )} palette={<Palette color={color} onColorClick={handleColors} />}>
+          <TodoItemList todos={todos} color={color} onToggle={handleToggle} onRemove={handleRemove} />
+        </TodoListTemplate>
+      </>
     );
   }
 }
