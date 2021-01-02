@@ -6,6 +6,8 @@ import Form from './components/Form';
 import TodoItemList from './components/TodoItemList';
 
 const GlobalStyle = createGlobalStyle`
+
+
 body{
   margin:0;
   padding:0;
