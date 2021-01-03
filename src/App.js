@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import TodoListTemplate from './components/TodoListTemplate';
+import TodoHead from './components/TodoHead';
 import Palette from './components/Palette';
 import Form from './components/Form';
 import TodoItemList from './components/TodoItemList';
@@ -123,6 +124,7 @@ class App extends Component {
             onCreate={handleCreate}
           />
         )} palette={<Palette color={color} onColorClick={handleColors} />}>
+          <TodoHead />
           <TodoItemList todos={todos} color={color} onToggle={handleToggle} onRemove={handleRemove} />
         </TodoListTemplate>
       </>
