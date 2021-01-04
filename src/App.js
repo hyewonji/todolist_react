@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import TodoListTemplate from './components/TodoListTemplate';
 import TodoHead from './components/TodoHead';
 import TodoItemList from './components/TodoItemList';
-import TodoListCreate from './components/TodoListCreat';
+import TodoListCreate from './components/TodoListCreate';
 
 const GlobalStyle = createGlobalStyle`
 body{
