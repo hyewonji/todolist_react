@@ -2,17 +2,11 @@ import React, { Component } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import TodoListTemplate from './components/TodoListTemplate';
 import TodoHead from './components/TodoHead';
-import Palette from './components/Palette';
-import Form from './components/Form';
 import TodoItemList from './components/TodoItemList';
+import TodoListCreate from './components/TodoListCreat';
 
 const GlobalStyle = createGlobalStyle`
-
-
 body{
-  margin:0;
-  padding:0;
-  font-family: sans-serif;
   background: #e9ecef;
 }
 `;
@@ -115,17 +109,10 @@ class App extends Component {
     return (
       <>
         <GlobalStyle />
-        <TodoListTemplate form={(
-          <Form
-            value={input}
-            color={color}
-            onKeyPress={handleKeyPress}
-            onChange={handleChange}
-            onCreate={handleCreate}
-          />
-        )} palette={<Palette color={color} onColorClick={handleColors} />}>
+        <TodoListTemplate>
           <TodoHead />
           <TodoItemList todos={todos} color={color} onToggle={handleToggle} onRemove={handleRemove} />
+          <TodoListCreate/>
         </TodoListTemplate>
       </>
     );

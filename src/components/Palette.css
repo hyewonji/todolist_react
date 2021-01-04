@@ -1,6 +1,7 @@
 .palette{
     display: flex;
     justify-content: center;
+    color: grey;
 }
 
 .palette > div{
