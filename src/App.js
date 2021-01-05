@@ -4,6 +4,7 @@ import TodoListTemplate from './components/TodoListTemplate';
 import TodoHead from './components/TodoHead';
 import TodoItemList from './components/TodoItemList';
 import TodoListCreate from './components/TodoListCreate';
+import { TodoProvider } from './TodoContext';
 
 const GlobalStyle = createGlobalStyle`
 body{
@@ -107,14 +108,14 @@ class App extends Component {
     } = this; // this.handleChange, this.handleCreate, this.handleKeyPress 이런식의 작업을 생략할 수 있다.
 
     return (
-      <>
+      <TodoProvider>
         <GlobalStyle />
         <TodoListTemplate>
           <TodoHead />
           <TodoItemList todos={todos} color={color} onToggle={handleToggle} onRemove={handleRemove} />
           <TodoListCreate/>
         </TodoListTemplate>
-      </>
+      </TodoProvider>
     );
   }
 }

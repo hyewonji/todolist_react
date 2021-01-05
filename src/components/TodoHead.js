@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTodoState } from '../TodoContext';
 
 const TodoHeadBlock = styled.div`
     padding: 48px 32px 32px 24px;
@@ -13,16 +14,18 @@ const TodoHeadBlock = styled.div`
         margin-top: 4px;
         color: #868e96;
         font-size: 21px;
-      }
-      .tasks-left {
+    }
+    .tasks-left {
         color: #20c997;
         font-size: 18px;
         margin-top: 40px;
         font-weight: bold;
-      }
-    `;
+    }
+`;
 
 function TodoHead() {
+    const todos = useTodoState();
+    console.log(todos);
     return (
         <TodoHeadBlock>
             <h1>2021년 01월 03일</h1>
