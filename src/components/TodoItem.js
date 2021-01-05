@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone, MdDelete } from 'react-icons/md';
+import { useTodoDispatch } from '../TodoContext';
 //https://react-icons.github.io/react-icons -> react-icons
 
 const Remove = styled.div`
@@ -59,28 +60,21 @@ const Text = styled.div`
 `
 
 
-class TodoItem extends Component {
+function TodoItem({ id, done, text}){
+    const dispatch = useTodoDispatch();
+    const onToggle = () => dispatch({ type: 'TOGGLE', id });
+    const onRemove = () => dispatch({ type: 'REMOVE', id });
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.props.checked !== nextProps.checked;
-    }
+    return (
+        <TodoItemBlock>
+            <CheckCircle done={done} onClick={onToggle}>{done && <MdDone />}</CheckCircle>
+            <Text done={done}>{text}</Text>
+            <Remove onClick={onRemove}>
+                <MdDelete />
+            </Remove>
+        </TodoItemBlock>
+    );
 
-    render() {
-        const { done, text, color, checked, id, onToggle, onRemove } = this.props;
-        const style = {
-            color: color
-        }
-
-        return (
-            <TodoItemBlock>
-                <CheckCircle done={done}>{done && <MdDone />}</CheckCircle>
-                <Text done={done}>{text}</Text>
-                <Remove>
-                    <MdDelete />
-                </Remove>
-            </TodoItemBlock>
-        );
-    }
 }
 
 export default TodoItem;

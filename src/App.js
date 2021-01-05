@@ -12,113 +12,19 @@ body{
 }
 `;
 
-class App extends Component {
-
-  id = 3
-
-  state = {
-    input: '',
-    todos: [],
-    color: '#343a40'
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      input: e.target.value
-    });
-  }
-
-  handleCreate = () => {
-    const { input, todos } = this.state;
-    this.setState({
-      input: '',
-      todos: todos.concat({ // push 대신 concat을 사용하는 이유 : push랄 사용하면 추가된 배열과 이전의 배열을 비교할 수 없다. 즉, 최적화 할 수 없다.
-        id: this.id++,
-        text: input,
-        checked: false
-      })
-    });
-    localStorage.todo = JSON.stringify(todos)
-    console.log(todos)
-  }
-
-  handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      this.handleCreate();
-    }
-  }
-
-  handleToggle = (id) => {
-    const { todos } = this.state;
-    const index = todos.findIndex(todo => todo.id === id);
-    const selected = todos[index];
-    const nextTodos = [...todos];
-
-    //배열을 업데이트 할 때는 배열의 값을 직접 수정하면 절대 안됨!
-    //복잡도는 O(n)정도로 오버헤드가 발생하지 않음
-    nextTodos[index] = {
-      ...selected,
-      checked: !selected.checked
-    };
-
-    this.setState({
-      todos: nextTodos
-    });
-  }
-
-  handleRemove = (id) => {
-    const { todos } = this.state;
-    this.setState({
-      todos: todos.filter(todo => todo.id !== id)
-    });
-  }
-
-  handleColors = (e) => {
-    const { color } = this.state;
-    const colors = ['#343a40', '#f03e3e', '#12b886', '#228ae6'];
-    this.setState({
-      color: colors[Number(e.target.className)]
-    })
-  }
-
-  /*
-  constructor(props) {
-    super(props);
-    let { todos, id } = this.state;
-    const todoData = JSON.parse(localStorage.todo);
-    this.State = {
-      input: '',
-      todos: todoData,
-      color: '#343a40'
-    }
-    console.log(this.state)
-    console.log(todoData, this.state.todos)
-  }
-  */
-
-  render() {
-    const { input, todos, color } = this.state;
-    const {
-      handleChange,
-      handleCreate,
-      handleKeyPress,
-      handleToggle,
-      handleRemove,
-      handleColors
-    } = this; // this.handleChange, this.handleCreate, this.handleKeyPress 이런식의 작업을 생략할 수 있다.
-
-    return (
-      <TodoProvider>
-        <GlobalStyle />
-        <TodoListTemplate>
-          <TodoHead />
-          <TodoItemList todos={todos} color={color} onToggle={handleToggle} onRemove={handleRemove} />
-          <TodoListCreate/>
-        </TodoListTemplate>
-      </TodoProvider>
-    );
-  }
+function App() {
+  return (
+    <TodoProvider>
+      <GlobalStyle />
+      <TodoListTemplate>
+        <TodoHead />
+        <TodoItemList />
+        <TodoListCreate />
+      </TodoListTemplate>
+    </TodoProvider>
+  );
 }
+
 
 export default App;
 

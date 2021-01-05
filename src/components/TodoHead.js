@@ -30,7 +30,7 @@ function TodoHead() {
     const today = new Date();
     const dateString = today.toLocaleDateString('ko-KR', {
         year: 'numeric',
-        nonth: 'long',
+        month: 'long',
         day: 'numeric'
     });
     const dayName = today.toLocaleDateString('ko-KR', { weekday: 'long' });

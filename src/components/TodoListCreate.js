@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
+import { useTodoDispatch, useTodoNextId } from '../TodoContext';
 
 const CircleButton = styled.button`
     background: #38d9a9;
@@ -69,15 +70,39 @@ const Input = styled.input`
 
 function TodoListCreate() {
     const [open, setOpen] = useState(false);
+    const [value, setValue] = useState('');
+    
+    const dispatch = useTodoDispatch();
+    const nextId = useTodoNextId();
 
     const onToggle = () => setOpen(!open);
+    const onChange = e => setValue(e.target.value)
+    const onSubmit = e => {
+        e.preventDefault();//새로고침 방지
+        dispatch({
+            type: 'CREATE',
+            todo: {
+                id: nextId.current,
+                text: value,
+                done: false
+            }
+        });
+        setValue('');
+        setOpen(false);
+        nextId.current += 1;
+    }
 
     return (
         <>
             {open && (
                 <InsertFormPositioner>
-                    <InsertForm>
-                        <Input autoFocus placeholder="할 일을 입력 후, Enter를 누르세요" />
+                    <InsertForm onSubmit={onSubmit}>
+                        <Input 
+                        autoFocus 
+                        placeholder="할 일을 입력 후, Enter를 누르세요"
+                        onChange={onChange}
+                        value={value} 
+                        />
                     </InsertForm>
                 </InsertFormPositioner>
             )}
@@ -88,4 +113,7 @@ function TodoListCreate() {
     );
 }
 
-export default TodoListCreate;
+/*  React.memo로 감싸줘서 
+    TodoContext에서 관리하고 있는 state가 바뀔 때 TodoCreate의 불필요한 리렌더링 방지  
+    TodoContext에서 Context를 각각 만들어 줬기 때문에 가능하다.  */
+export default React.memo(TodoListCreate);
