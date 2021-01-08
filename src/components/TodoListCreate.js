@@ -53,7 +53,7 @@ const InsertFormPositioner = styled.div`
 
 const InsertForm = styled.form`
     background: #F7F8F9;
-    padding: 32px 32px 72px 32px;
+    padding: 0px 32px 72px 32px;
     border-radius: 0 0 16px 16px;
     border-top: 1px solid #e9ecef;
 `
@@ -66,7 +66,22 @@ const Input = styled.input`
     outline: none;
     font-size: 18px;
     box-sizing: border-box;
-`;
+`
+
+const PaletteForm = styled.div`
+    width:100%;
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+`
+
+const Palettecolor = styled.div`
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    background: ${props => props.color};
+    cursor:pointer;
+`
 
 function TodoListCreate() {
     const [open, setOpen] = useState(false);
@@ -92,11 +107,19 @@ function TodoListCreate() {
         nextId.current += 1;
     }
 
+    const Palette = ['rgb(65, 65, 65)',' #ff9c9c','#8ad3b8',' #86bbf0']
+
     return (
         <>
             {open && (
                 <InsertFormPositioner>
                     <InsertForm onSubmit={onSubmit}>
+                        <PaletteForm>
+                            <Palettecolor color={Palette[0]}></Palettecolor>
+                            <Palettecolor color={Palette[1]}></Palettecolor>
+                            <Palettecolor color={Palette[2]}></Palettecolor>
+                            <Palettecolor color={Palette[3]}></Palettecolor>
+                        </PaletteForm>
                         <Input 
                         autoFocus 
                         placeholder="할 일을 입력 후, Enter를 누르세요"

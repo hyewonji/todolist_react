@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import TodoListTemplate from './components/TodoListTemplate';
 import TodoHead from './components/TodoHead';
