@@ -66,6 +66,7 @@ const Input = styled.input`
     outline: none;
     font-size: 18px;
     box-sizing: border-box;
+    color: ${props => props.color};
 `
 
 const PaletteForm = styled.div`
@@ -86,12 +87,17 @@ const Palettecolor = styled.div`
 function TodoListCreate() {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('');
-    
+    const [nowColor, setNowColor] = useState("black")
+
     const dispatch = useTodoDispatch();
     const nextId = useTodoNextId();
 
     const onToggle = () => setOpen(!open);
     const onChange = e => setValue(e.target.value)
+    const onColor = (e) => {
+        const color = e.target.id;
+        setNowColor(color);
+    }
     const onSubmit = e => {
         e.preventDefault();//새로고침 방지
         dispatch({
@@ -115,16 +121,17 @@ function TodoListCreate() {
                 <InsertFormPositioner>
                     <InsertForm onSubmit={onSubmit}>
                         <PaletteForm>
-                            <Palettecolor color={Palette[0]}></Palettecolor>
-                            <Palettecolor color={Palette[1]}></Palettecolor>
-                            <Palettecolor color={Palette[2]}></Palettecolor>
-                            <Palettecolor color={Palette[3]}></Palettecolor>
+                            <Palettecolor onClick={onColor} id={Palette[0]} color={Palette[0]}></Palettecolor>
+                            <Palettecolor onClick={onColor} id={Palette[1]} color={Palette[1]}></Palettecolor>
+                            <Palettecolor onClick={onColor} id={Palette[2]} color={Palette[2]}></Palettecolor>
+                            <Palettecolor onClick={onColor} id={Palette[3]} color={Palette[3]}></Palettecolor>
                         </PaletteForm>
                         <Input 
                         autoFocus 
                         placeholder="할 일을 입력 후, Enter를 누르세요"
                         onChange={onChange}
-                        value={value} 
+                        value={value}
+                        color={nowColor}
                         />
                     </InsertForm>
                 </InsertFormPositioner>
