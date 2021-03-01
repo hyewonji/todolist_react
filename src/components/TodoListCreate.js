@@ -76,7 +76,7 @@ const PaletteForm = styled.div`
     justify-content: center;
 `
 
-const Palettecolor = styled.div`
+const PaletteColor = styled.div`
     width: 30px;
     height: 30px;
     margin: 10px;
@@ -105,15 +105,17 @@ function TodoListCreate() {
             todo: {
                 id: nextId.current,
                 text: value,
-                done: false
+                done: false,
+                color: nowColor
             }
         });
         setValue('');
         setOpen(false);
+        setNowColor("black")
         nextId.current += 1;
     }
 
-    const Palette = ['rgb(65, 65, 65)',' #ff9c9c','#8ad3b8',' #86bbf0']
+    const Palette = ['#000000',' #ff9c9c','#8ad3b8',' #86bbf0']
 
     return (
         <>
@@ -121,10 +123,10 @@ function TodoListCreate() {
                 <InsertFormPositioner>
                     <InsertForm onSubmit={onSubmit}>
                         <PaletteForm>
-                            <Palettecolor onClick={onColor} id={Palette[0]} color={Palette[0]}></Palettecolor>
-                            <Palettecolor onClick={onColor} id={Palette[1]} color={Palette[1]}></Palettecolor>
-                            <Palettecolor onClick={onColor} id={Palette[2]} color={Palette[2]}></Palettecolor>
-                            <Palettecolor onClick={onColor} id={Palette[3]} color={Palette[3]}></Palettecolor>
+                            <PaletteColor onClick={onColor} id={Palette[0]} color={Palette[0]}></PaletteColor>
+                            <PaletteColor onClick={onColor} id={Palette[1]} color={Palette[1]}></PaletteColor>
+                            <PaletteColor onClick={onColor} id={Palette[2]} color={Palette[2]}></PaletteColor>
+                            <PaletteColor onClick={onColor} id={Palette[3]} color={Palette[3]}></PaletteColor>
                         </PaletteForm>
                         <Input 
                         autoFocus 

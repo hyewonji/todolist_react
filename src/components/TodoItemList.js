@@ -22,6 +22,7 @@ function TodoItemList() {
                     id={todo.id}
                     text={todo.text}
                     done={todo.done}
+                    color={todo.color}
                 />
             ))}
         </TodoListBlock>
