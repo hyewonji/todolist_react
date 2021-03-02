@@ -51,7 +51,8 @@ const CheckCircle = styled.div`
 const Text = styled.div`
     flex: 1;
     font-size: 21px;
-    color: ${props => !props.done ? props.color : "#ced4da" };
+    color: ${props => props.color};
+    opacity: ${props => props.done ? 0.6 : 1};
 `
 
 function TodoItem({ id, done, text, color}){
